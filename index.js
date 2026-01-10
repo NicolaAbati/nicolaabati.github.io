@@ -22,15 +22,24 @@ document.addEventListener('DOMContentLoaded', () => {
       // Compute scroll offset relative to the container (accounts for padding)
       const containerRect = container.getBoundingClientRect();
       const targetRect = target.getBoundingClientRect();
-      const scrollTop = container.scrollTop + (targetRect.top - containerRect.top);
+      const scrollTop = container.scrollTop + (targetRect.top - containerRect.top - 100);
+      // Disable scroll-driven active updates while programmatic smooth scrolling occurs
+      const distance = Math.abs(scrollTop - container.scrollTop);
+      const estimatedDuration = Math.min(900, Math.max(320, Math.round(distance * 0.5)));
+      isProgrammaticScroll = true;
+      clearTimeout(programmaticScrollTimer);
+      programmaticScrollTimer = setTimeout(() => { isProgrammaticScroll = false; }, estimatedDuration + 80);
       container.scrollTo({ top: scrollTop, behavior: 'smooth' });
     });
   });
 
   // Smooth, low-jitter scroll handler using container center
   let ticking = false;
+  let isProgrammaticScroll = false;
+  let programmaticScrollTimer = null;
   const onScroll = () => {
     if (ticking) return;
+    if (isProgrammaticScroll) return; // ignore scroll events triggered by our smooth scroll
     ticking = true;
     requestAnimationFrame(() => {
         // Use viewport coordinates to compute the element closest to the container center
