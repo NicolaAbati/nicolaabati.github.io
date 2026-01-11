@@ -26,12 +26,14 @@ body {
     rgba(12, 22, 43, 1) 0%,
     rgba(18, 32, 68, 1) 100%
   ); */
+
   background: #04070f;
   background: linear-gradient(
     90deg,
     rgba(4, 7, 15, 1) 0%,
     rgba(10, 20, 43, 1) 100%
   );
+
   display: flex;
   justify-content: center;
   gap: 100px;
@@ -42,7 +44,7 @@ body {
 }
 
 /* Cursor light overlay */
-body::before {
+/* body::before {
   content: "";
   position: fixed;
   left: 0;
@@ -61,7 +63,7 @@ body::before {
   opacity: var(--light-opacity);
   transition: opacity 240ms linear;
   z-index: 1;
-}
+} */
 
 .personal-info {
   flex: 1;
@@ -244,7 +246,7 @@ body::before {
 }
 
 .tech-card img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .stack-info {
@@ -277,6 +279,7 @@ body::before {
 
 .tech-popover .close {
   position: absolute;
+  top: 20px;
   right: 20px;
   background: transparent;
   border: none;
@@ -343,8 +346,8 @@ body::before {
 
   .profile img {
     margin-right: 12px;
-    height: 200px;
-    width: 200px;
+    height: 100px;
+    width: 100px;
   }
 
   .portfolio {

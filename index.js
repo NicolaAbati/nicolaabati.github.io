@@ -64,43 +64,43 @@ document.addEventListener('DOMContentLoaded', () => {
   if (sections.length) setActive(sections[0].id);
 
   // Cursor-following light effect (rAF-throttled)
-  (function(){
-    let pending = false;
-    let lastEvt = null;
+  // (function(){
+  //   let pending = false;
+  //   let lastEvt = null;
 
-    function applyCoords(e){
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      let x, y;
-      if (e.touches && e.touches[0]) {
-        x = e.touches[0].clientX;
-        y = e.touches[0].clientY;
-      } else {
-        x = e.clientX;
-        y = e.clientY;
-      }
-      const px = (x / w) * 100;
-      const py = (y / h) * 100;
-      document.documentElement.style.setProperty('--mx', px + '%');
-      document.documentElement.style.setProperty('--my', py + '%');
-      document.documentElement.style.setProperty('--light-opacity', '0.2');
-    }
+  //   function applyCoords(e){
+  //     const w = window.innerWidth;
+  //     const h = window.innerHeight;
+  //     let x, y;
+  //     if (e.touches && e.touches[0]) {
+  //       x = e.touches[0].clientX;
+  //       y = e.touches[0].clientY;
+  //     } else {
+  //       x = e.clientX;
+  //       y = e.clientY;
+  //     }
+  //     const px = (x / w) * 100;
+  //     const py = (y / h) * 100;
+  //     document.documentElement.style.setProperty('--mx', px + '%');
+  //     document.documentElement.style.setProperty('--my', py + '%');
+  //     document.documentElement.style.setProperty('--light-opacity', '0.2');
+  //   }
 
-    function schedule(){
-      if (pending) return;
-      pending = true;
-      requestAnimationFrame(() => {
-        if (lastEvt) applyCoords(lastEvt);
-        pending = false;
-      });
-    }
+  //   function schedule(){
+  //     if (pending) return;
+  //     pending = true;
+  //     requestAnimationFrame(() => {
+  //       if (lastEvt) applyCoords(lastEvt);
+  //       pending = false;
+  //     });
+  //   }
 
-    window.addEventListener('pointermove', (e) => { lastEvt = e; schedule(); }, {passive:true});
-    window.addEventListener('touchmove', (e) => { lastEvt = e; schedule(); }, {passive:true});
-    window.addEventListener('pointerleave', () => { document.documentElement.style.setProperty('--light-opacity','0'); });
-    window.addEventListener('blur', () => { document.documentElement.style.setProperty('--light-opacity','0'); });
-    window.addEventListener('pointerdown', (e)=>{ lastEvt = e; schedule(); });
-  })();
+  //   window.addEventListener('pointermove', (e) => { lastEvt = e; schedule(); }, {passive:true});
+  //   window.addEventListener('touchmove', (e) => { lastEvt = e; schedule(); }, {passive:true});
+  //   window.addEventListener('pointerleave', () => { document.documentElement.style.setProperty('--light-opacity','0'); });
+  //   window.addEventListener('blur', () => { document.documentElement.style.setProperty('--light-opacity','0'); });
+  //   window.addEventListener('pointerdown', (e)=>{ lastEvt = e; schedule(); });
+  // })();
 
   // Tech logo popovers
   const techLogos = Array.from(document.querySelectorAll('.tech-logo'));
