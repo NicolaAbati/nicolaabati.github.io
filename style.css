@@ -8,25 +8,10 @@ body {
   box-sizing: border-box;
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial;
-  /* color: #dbe8f7; */
   color: #c9e1fc;
 }
 
-:root {
-  --sidebar-height: 220px;
-  --mx: 50%;
-  --my: 50%;
-  --light-opacity: 0.9;
-}
-
 body {
-  /* background: #0c162b;
-  background: linear-gradient(
-    90deg,
-    rgba(12, 22, 43, 1) 0%,
-    rgba(18, 32, 68, 1) 100%
-  ); */
-
   background: #04070f;
   background: linear-gradient(
     90deg,
@@ -43,28 +28,6 @@ body {
   padding: 0 18%;
 }
 
-/* Cursor light overlay */
-/* body::before {
-  content: "";
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    circle at var(--mx) var(--my),
-    rgba(255, 255, 255, 0.12) 0%,
-    rgba(255, 255, 255, 0.06) 6%,
-    rgba(255, 255, 255, 0.02) 14%,
-    transparent 28%
-  );
-  mix-blend-mode: screen;
-  opacity: var(--light-opacity);
-  transition: opacity 240ms linear;
-  z-index: 1;
-} */
-
 .personal-info {
   flex: 1;
   padding: 80px 30px;
@@ -77,7 +40,6 @@ body {
   bottom: 0;
   overflow: hidden;
   z-index: 10;
-
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(19px);
   -webkit-backdrop-filter: blur(19px);
@@ -238,8 +200,8 @@ body {
 }
 
 .tech-card img {
-  height: 40px;
-  width: 40px;
+  height: 45px;
+  width: 45px;
   margin: 6px;
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -249,7 +211,6 @@ body {
   transform: scale(1.1);
 }
 
-/* Project card (portfolio template) */
 .project-card {
   background: linear-gradient(
     180deg,
@@ -298,7 +259,6 @@ body {
   color: #fff;
 }
 
-
 .stack-info {
   display: block;
   margin: 12px 0;
@@ -309,6 +269,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 15px;
 }
 
 /* Popover / bottom-sheet */
@@ -356,11 +317,11 @@ body {
 .divider {
   height: 1px;
   background-color: rgba(255, 255, 255, 0.1);
-  margin: 50px auto;
+  margin: 20px auto;
   width: 20%;
 }
 
-/* Blur in fondo al portfolio solo su desktop */
+/* Blur effect on the page bottom ( desktop only ) */
 @media (min-width: 800px) {
   .portfolio::after {
     content: "";
@@ -370,11 +331,11 @@ body {
     bottom: 0;
     height: 100px;
     pointer-events: none;
-
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
   }
 }
 
+/* Medium screens responsiveness */
 @media (max-width: 1366px) {
   body {
     padding: 0 5%;
@@ -386,7 +347,7 @@ body {
   }
 }
 
-/* Responsive */
+/* Mobile responsiveness */
 @media (max-width: 800px) {
   body {
     flex-direction: column;
@@ -403,6 +364,8 @@ body {
     align-items: center;
     gap: 12px;
     padding: 10%;
+    margin: 0;
+    min-height: 300px;
   }
 
   .profile {
@@ -413,14 +376,13 @@ body {
 
   .profile img {
     margin-right: 12px;
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
   }
 
   .portfolio {
     padding: 20px 0;
     margin-left: 0;
-    height: calc(100vh - var(--sidebar-height));
   }
 
   .side-menu {
