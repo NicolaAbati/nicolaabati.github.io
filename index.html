@@ -2,17 +2,17 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Nicola Abati</title>
+    <title>< Nicola Abati /></title>
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
     <!-- TODO: meta tags -->
     <link rel="image_src" href="assets/preview.png" />
-    <meta
-      name="description"
-      content="Nicola Abati — Full Stack Developer. Portfolio and projects."
-    />
+    <meta name="description" content="Nicola Abati — Full Stack Developer" />
     <meta property="og:title" content="Nicola Abati — Portfolio" />
     <meta
       property="og:description"
@@ -30,14 +30,49 @@
     <meta name="twitter:image" content="assets/preview.png" />
   </head>
   <body>
+    <button id="scroll-to-top" class="scroll-to-top">
+      <svg
+        width="32px"
+        height="32px"
+        viewBox="0 -19.04 75.803 75.803"
+        xmlns="http://www.w3.org/2000/svg"
+        fill="#000000"
+      >
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g
+          id="SVGRepo_tracerCarrier"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        ></g>
+        <g id="SVGRepo_iconCarrier">
+          <g
+            id="Group_66"
+            data-name="Group 66"
+            transform="translate(-619.375 -560.018)"
+          >
+            <path
+              id="Path_58"
+              data-name="Path 58"
+              d="M695.178,596.248a1.5,1.5,0,0,1-2.561,1.061l-33.56-33.557a2.53,2.53,0,0,0-3.564,0l-33.558,33.557a1.5,1.5,0,0,1-2.121-2.121l33.557-33.557a5.531,5.531,0,0,1,7.808,0l33.559,33.557A1.494,1.494,0,0,1,695.178,596.248Z"
+              fill="#ffffff"
+            ></path>
+          </g>
+        </g>
+      </svg>
+    </button>
     <section class="personal-info">
       <div class="profile">
-        <img src="assets/propic.png" alt="Profile Picture" />
-        <h1>Nicola Abati</h1>
-        <h2>Full Stack Developer</h2>
-        <!-- <p class="bio">
-          TODO: brief description
-        </p> -->
+        <div class="image-and-name">
+          <img src="assets/propic.png" alt="Profile Picture" />
+          <div>
+            <h1>Nicola Abati</h1>
+            <h2>Full Stack Developer</h2>
+          </div>
+        </div>
+        <p class="bio">
+          Designing and developing websites and applications with simplicity,
+          performance and maintainability in mind.
+        </p>
       </div>
       <nav class="side-menu" aria-label="Main navigation">
         <ul>
@@ -115,13 +150,14 @@
             </svg>
           </a>
         </div>
-        <i>nicola.abati@icloud.com</i>
+        <a href="mailto:nicola.abati@icloud.com"
+          ><i>nicola.abati@icloud.com</i></a
+        >
       </div>
     </section>
     <section class="portfolio" id="content">
       <section id="presentation-section" class="panel">
         <h2>First things first</h2>
-        <p>Hi, my name is Nicola.</p>
         <p>I’m a web developer from Rimini, Italy.</p>
         <p>
           I discovered my passion for coding while studying electronics and
@@ -387,8 +423,8 @@
         <p>
           I also work with content management systems such as WordPress and
           Directus, both in traditional and headless setups, integrating them
-          into modern application architectures when content flexibility and
-          scalability are required.
+          into modern application architectures when content flexibility is
+          required.
         </p>
         <div class="tech-card">
           <i class="stack-info">Explore my stack by clicking the icons below</i>
@@ -478,6 +514,7 @@
           </div>
         </div>
       </section>
+      <div class="divider" role="separator" aria-orientation="horizontal"></div>
       <section id="portfolio-section" class="panel">
         <h2>Portfolio</h2>
         <p>
@@ -526,8 +563,36 @@
           >
         </div>
 
-        <i>More work is underway - check back soon to see what’s next! </i>
+        <p style="text-align: center">
+          <i>More work is underway - check back soon to see what’s next! </i>
+        </p>
       </section>
+      <!-- Footer: contact details -->
+      <footer class="site-footer" aria-label="Footer contacts">
+        <div class="footer-inner">
+          <p>
+            <a href="mailto:nicola.abati@icloud.com">nicola.abati@icloud.com</a>
+          </p>
+          <p class="footer-links">
+            <a
+              href="https://github.com/NicolaAbati"
+              target="_blank"
+              rel="noopener"
+              aria-label="GitHub"
+              >GitHub</a
+            >
+            <span aria-hidden="true">•</span>
+            <a
+              href="https://www.linkedin.com/in/nicola-abati/"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+              >LinkedIn</a
+            >
+          </p>
+          <p class="copyright">&copy; 2026 Nicola Abati</p>
+        </div>
+      </footer>
     </section>
     <script src="index.js"></script>
   </body>

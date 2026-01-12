@@ -1,35 +1,79 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const container = document.querySelector('.portfolio');
-  const links = Array.from(document.querySelectorAll('.side-menu a'));
-  const sections = Array.from(container.querySelectorAll('.panel'));
+function isMobile() {
+  const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+  return regex.test(navigator.userAgent);
+}
+
+let scrollToTop = document.querySelector("#scroll-to-top");
+scrollToTop.addEventListener("click", (e) => {
+  e.preventDefault();
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.querySelector(".portfolio");
+  const links = Array.from(document.querySelectorAll(".side-menu a"));
+  const sections = Array.from(container.querySelectorAll(".panel"));
 
   let activeId = null;
 
   const setActive = (id) => {
     if (activeId === id) return;
     activeId = id;
-    links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+    links.forEach((l) =>
+      l.classList.toggle("active", l.getAttribute("href") === "#" + id)
+    );
   };
 
   // Click handler: highlight immediately and scroll inside container smoothly
-  links.forEach(link => {
-    link.addEventListener('click', (e) => {
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
       e.preventDefault();
-      const id = link.getAttribute('href').slice(1);
-      const target = container.querySelector('#' + id);
+      const id = link.getAttribute("href").slice(1);
+      const target = container.querySelector("#" + id);
       if (!target) return;
+
+      // Aggiorna subito l'elemento attivo
       setActive(id);
-      // Compute scroll offset relative to the container (accounts for padding)
-      const containerRect = container.getBoundingClientRect();
-      const targetRect = target.getBoundingClientRect();
-      const scrollTop = container.scrollTop + (targetRect.top - containerRect.top - 100);
-      // Disable scroll-driven active updates while programmatic smooth scrolling occurs
-      const distance = Math.abs(scrollTop - container.scrollTop);
-      const estimatedDuration = Math.min(900, Math.max(320, Math.round(distance * 0.5)));
+
+      // Usa scrollIntoView con offset per header fisso
+      const headerOffset = 60; // altezza menu/header fisso
+
+      if (!isMobile()) {
+        const elementPosition = target.getBoundingClientRect().top;
+        const offsetPosition =
+          elementPosition + container.scrollTop - headerOffset;
+
+        container.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        });
+      } else {
+        // Ottieni la posizione assoluta rispetto al documento
+        const targetPosition =
+          target.getBoundingClientRect().top + window.pageYOffset;
+        const scrollToPosition = targetPosition - headerOffset;
+
+        // Scroll fluido usando window
+        window.scrollTo({
+          top: scrollToPosition,
+          behavior: "smooth",
+        });
+      }
+
+      // Disabilita aggiornamento durante lo scroll programmatico
+      const distance = Math.abs(offsetPosition - container.scrollTop);
+      const estimatedDuration = Math.min(
+        900,
+        Math.max(320, Math.round(distance * 0.5))
+      );
       isProgrammaticScroll = true;
       clearTimeout(programmaticScrollTimer);
-      programmaticScrollTimer = setTimeout(() => { isProgrammaticScroll = false; }, estimatedDuration + 80);
-      container.scrollTo({ top: scrollTop, behavior: 'smooth' });
+      programmaticScrollTimer = setTimeout(() => {
+        isProgrammaticScroll = false;
+      }, estimatedDuration + 80);
     });
   });
 
@@ -37,101 +81,131 @@ document.addEventListener('DOMContentLoaded', () => {
   let ticking = false;
   let isProgrammaticScroll = false;
   let programmaticScrollTimer = null;
+
   const onScroll = () => {
     if (ticking) return;
     if (isProgrammaticScroll) return; // ignore scroll events triggered by our smooth scroll
     ticking = true;
     requestAnimationFrame(() => {
-        // Use viewport coordinates to compute the element closest to the container center
-        const containerRect = container.getBoundingClientRect();
-        const containerCenterY = containerRect.top + container.clientHeight / 2;
-        let nearest = null;
-        let minDist = Infinity;
-        sections.forEach(s => {
-          const r = s.getBoundingClientRect();
-          const midY = r.top + r.height / 2;
-          const dist = Math.abs(midY - containerCenterY);
-          if (dist < minDist) { minDist = dist; nearest = s; }
-        });
-        if (nearest) setActive(nearest.id);
+      // Use viewport coordinates to compute the element closest to the container center
+      const containerRect = container.getBoundingClientRect();
+      const containerCenterY = containerRect.top + container.clientHeight / 2;
+      let nearest = null;
+      let minDist = Infinity;
+      sections.forEach((s) => {
+        const r = s.getBoundingClientRect();
+        const midY = r.top + r.height / 2;
+        const dist = Math.abs(midY - containerCenterY);
+        if (dist < minDist) {
+          minDist = dist;
+          nearest = s;
+        }
+      });
+      if (nearest) setActive(nearest.id);
       ticking = false;
     });
   };
 
-  container.addEventListener('scroll', onScroll, { passive: true });
+  container.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener(
+    "scroll",
+    () => {
+      // distanza scrollata dall'inizio
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const showAfter = 300; // mostra il bottone dopo 300px di scroll
 
+      if (scrollTop > showAfter) {
+        scrollToTop.style.opacity = "1";
+      } else {
+        scrollToTop.style.opacity = "0";
+      }
+    },
+    { passive: true }
+  );
   // Initial highlight
-  if (sections.length) setActive(sections[0].id);
+  if (sections.length && !isMobile()) setActive(sections[0].id);
 
   // Tech logo popovers
-  const techLogos = Array.from(document.querySelectorAll('.tech-logo'));
+  const techLogos = Array.from(document.querySelectorAll(".tech-logo"));
 
   const closePopover = () => {
-    const existingOverlay = document.querySelector('.tech-overlay');
+    const existingOverlay = document.querySelector(".tech-overlay");
     if (existingOverlay) existingOverlay.remove();
-    const existingPopover = document.querySelector('.tech-popover');
+    const existingPopover = document.querySelector(".tech-popover");
     if (existingPopover) existingPopover.remove();
-    document.removeEventListener('keydown', onKeyDown);
+    document.removeEventListener("keydown", onKeyDown);
   };
 
   const onKeyDown = (e) => {
-    if (e.key === 'Escape') closePopover();
+    if (e.key === "Escape") closePopover();
   };
 
   const openPopover = (logoEl) => {
     closePopover();
-    const desc = logoEl.getAttribute('data-desc') || logoEl.alt || '';
-    const overlay = document.createElement('div');
-    overlay.className = 'tech-overlay';
-    overlay.addEventListener('click', (e) => {
+    const desc = logoEl.getAttribute("data-desc") || logoEl.alt || "";
+    const overlay = document.createElement("div");
+    overlay.className = "tech-overlay";
+    overlay.addEventListener("click", (e) => {
       if (e.target === overlay) closePopover();
     });
 
-    const pop = document.createElement('div');
-    pop.className = 'tech-popover';
-    pop.setAttribute('role', 'dialog');
-    pop.setAttribute('aria-modal', 'true');
+    const pop = document.createElement("div");
+    pop.className = "tech-popover";
+    pop.setAttribute("role", "dialog");
+    pop.setAttribute("aria-modal", "true");
 
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'close';
-    closeBtn.innerText = '×';
-    closeBtn.style.cursor = 'pointer';
-    closeBtn.addEventListener('click', closePopover);
+    const closeBtn = document.createElement("button");
+    closeBtn.className = "close";
+    closeBtn.innerText = "×";
+    closeBtn.style.cursor = "pointer";
+    closeBtn.addEventListener("click", closePopover);
     pop.appendChild(closeBtn);
 
-    const header = document.createElement('div');
-    header.style.display = 'flex';
-    header.style.alignItems = 'center';
-    header.style.gap = '10px';
+    const header = document.createElement("div");
+    header.style.display = "flex";
+    header.style.alignItems = "center";
+    header.style.gap = "10px";
     const logoClone = logoEl.cloneNode(true);
-    logoClone.removeAttribute('data-desc');
-    logoClone.removeAttribute('tabindex');
-    logoClone.style.width = '60px';
-    logoClone.style.height = '60px';
-    logoClone.style.margin = '0 0 20px 0';
+    logoClone.removeAttribute("data-desc");
+    logoClone.removeAttribute("tabindex");
+    logoClone.style.width = "60px";
+    logoClone.style.height = "60px";
+    logoClone.style.margin = "0 0 20px 0";
     header.appendChild(logoClone);
-    const title = document.createElement('div');
-    title.innerHTML = '<strong style="display:block;margin-bottom:6px">' + (logoEl.alt || '') + '</strong>';
+    const title = document.createElement("div");
+    title.innerHTML =
+      '<strong style="display:block;margin-bottom:6px">' +
+      (logoEl.alt || "") +
+      "</strong>";
     pop.appendChild(header);
 
-    const content = document.createElement('div');
-    content.className = 'content';
-    content.style.marginTop = '8px';
+    const content = document.createElement("div");
+    content.className = "content";
+    content.style.marginTop = "8px";
     content.innerText = desc;
     pop.appendChild(content);
 
     overlay.appendChild(pop);
     document.body.appendChild(overlay);
-    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener("keydown", onKeyDown);
 
     // Positioning for desktop, mobile bottom sheet
-    const isMobile = window.matchMedia('(max-width: 800px)').matches;
+    const isMobile = window.matchMedia("(max-width: 800px)").matches;
     if (isMobile) {
-      pop.classList.add('mobile');
-      overlay.style.alignItems = 'flex-end';
-      // no extra positioning needed; bottom sheet fills width via CSS
+      // Center popover on small screens instead of bottom sheet
+      overlay.style.alignItems = "center";
+      overlay.style.justifyContent = "center";
+      pop.style.position = "fixed";
+      pop.style.left = "50%";
+      pop.style.top = "50%";
+      pop.style.transform = "translate(-50%, -50%)";
+      pop.style.maxWidth = "92%";
+      pop.style.width = "70%";
+      // ensure mobile-specific class doesn't force bottom-sheet styles
+      pop.classList.remove("mobile");
     } else {
-      overlay.style.alignItems = 'flex-start';
+      overlay.style.alignItems = "flex-start";
       // position pop next to logo
       const rect = logoEl.getBoundingClientRect();
       const popRect = pop.getBoundingClientRect();
@@ -143,18 +217,24 @@ document.addEventListener('DOMContentLoaded', () => {
         left = rect.left - 12 - 320;
       }
       // ensure top within viewport
-      if (top + popRect.height > window.innerHeight) top = window.innerHeight - popRect.height - 12;
+      if (top + popRect.height > window.innerHeight)
+        top = window.innerHeight - popRect.height - 12;
       if (top < 12) top = 12;
-      pop.style.left = left + 'px';
-      pop.style.top = top + 'px';
-      pop.style.position = 'fixed';
+      pop.style.left = left + "px";
+      pop.style.top = top + "px";
+      pop.style.position = "fixed";
     }
     // focus close for accessibility
     closeBtn.focus();
   };
 
-  techLogos.forEach(logo => {
-    logo.addEventListener('click', () => openPopover(logo));
-    logo.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openPopover(logo); } });
+  techLogos.forEach((logo) => {
+    logo.addEventListener("click", () => openPopover(logo));
+    logo.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openPopover(logo);
+      }
+    });
   });
 });

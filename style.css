@@ -1,7 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
-  height: 100%;
+  height: auto; /* permette al documento di crescere con il contenuto */
+  min-height: 100%; /* assicura che occupi almeno tutta la finestra */
   width: 100%;
   margin: 0;
   padding: 0;
@@ -9,6 +15,7 @@ body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
     "Helvetica Neue", Arial;
   color: #c9e1fc;
+  overflow-x: hidden;
 }
 
 body {
@@ -28,6 +35,10 @@ body {
   padding: 0 18%;
 }
 
+a {
+  color: inherit; /* eredita il colore del testo circostante */
+}
+
 .personal-info {
   flex: 1;
   padding: 80px 30px;
@@ -35,9 +46,6 @@ body {
   flex-direction: column;
   gap: 24px;
   margin: 30px 0;
-  top: 0;
-  left: 0;
-  bottom: 0;
   overflow: hidden;
   z-index: 10;
   background: rgba(255, 255, 255, 0.05);
@@ -97,7 +105,7 @@ body {
 }
 
 .profile h1 {
-  margin: 6px 0 0 0;
+  margin: 6px 0 6px 0;
   font-size: 2rem;
   color: #f3f8ff;
 }
@@ -110,7 +118,7 @@ body {
 }
 
 .bio {
-  margin: 0;
+  margin: 10px 0;
   font-size: 0.9rem;
   color: #d6e6ff;
   opacity: 0.9;
@@ -156,7 +164,7 @@ body {
   overflow-y: auto;
   gap: 20px;
   box-sizing: border-box;
-  padding: 100px 0;
+  padding: 100px 0 50px 0;
 }
 
 .portfolio {
@@ -276,7 +284,7 @@ body {
 .tech-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(2, 6, 23, 0.45);
+  background: rgba(2, 6, 23, 0.8);
   z-index: 120;
   display: flex;
   align-items: flex-end;
@@ -321,6 +329,23 @@ body {
   width: 20%;
 }
 
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+  background: #252525bb;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  z-index: 999;
+  opacity: 0;
+  transition: 0.5s opacity;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
 /* Blur effect on the page bottom ( desktop only ) */
 @media (min-width: 800px) {
   .portfolio::after {
@@ -342,20 +367,30 @@ body {
   }
 
   .personal-info {
-    height: 75%;
     margin: auto;
+    padding: 40px;
+    gap: 10px;
+  }
+
+  .profile img {
+    height: 150px;
+    width: 150px;
   }
 }
 
 /* Mobile responsiveness */
 @media (max-width: 800px) {
   body {
-    flex-direction: column;
+    display: block;
     padding: 10% 10%;
-    gap: 0;
     height: auto;
+    gap: 0;
     min-height: none;
     overflow: auto;
+  }
+
+  .side-menu ul {
+    gap: 0;
   }
 
   .personal-info {
@@ -366,6 +401,21 @@ body {
     padding: 10%;
     margin: 0;
     min-height: 300px;
+    height: auto;
+  }
+
+  .profile h1 {
+    font-size: 1.2rem;
+  }
+
+  .profile h2 {
+    font-size: 1rem;
+  }
+
+  .image-and-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 
   .profile {
@@ -376,8 +426,8 @@ body {
 
   .profile img {
     margin-right: 12px;
-    height: 150px;
-    width: 150px;
+    height: 100px;
+    width: 100px;
   }
 
   .portfolio {
@@ -385,8 +435,52 @@ body {
     margin-left: 0;
   }
 
-  .side-menu {
-    visibility: hidden;
-    position: absolute;
+  /* Footer styles */
+  .site-footer {
+    margin-top: 32px;
+    padding: 28px 0;
+    text-align: center;
+    color: #9fc7ff;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .site-footer .footer-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 18%;
+    box-sizing: border-box;
+  }
+  .site-footer a {
+    color: #cfe2ff;
+    text-decoration: none;
+    margin: 0 8px;
+  }
+  .site-footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+  .site-footer .footer-links {
+    margin: 8px 0 4px 0;
+  }
+  .site-footer p {
+    margin: 6px 0;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 1366px) {
+    .site-footer .footer-inner {
+      padding: 0 5%;
+    }
+  }
+
+  @media (max-width: 800px) {
+    .site-footer {
+      padding: 20px 0;
+    }
+    .site-footer .footer-inner {
+      padding: 0 10%;
+    }
+    .site-footer p {
+      font-size: 0.95rem;
+    }
   }
 }
