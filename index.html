@@ -6,6 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Nicola Abati</title>
     <link rel="stylesheet" href="style.css" />
+    <!-- Social / preview image (replace with your public image at assets/preview.png) -->
+    <link rel="image_src" href="assets/preview.png" />
+    <meta
+      name="description"
+      content="Nicola Abati — Full Stack Developer. Portfolio and projects."
+    />
+    <meta property="og:title" content="Nicola Abati — Portfolio" />
+    <meta
+      property="og:description"
+      content="Portfolio of projects by Nicola Abati — front end, back end and tooling."
+    />
+    <meta property="og:image" content="assets/preview.png" />
+    <meta property="og:image:alt" content="Portfolio preview thumbnail" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Nicola Abati — Portfolio" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of projects by Nicola Abati."
+    />
+    <meta name="twitter:image" content="assets/preview.png" />
   </head>
   <body>
     <section class="personal-info">
@@ -20,11 +41,13 @@
       </div>
       <nav class="side-menu" aria-label="Main navigation">
         <ul>
-          <li><a href="#resume">About me</a></li>
-          <li><a href="#projects">Front End</a></li>
-          <li><a href="#experience">Back End</a></li>
-          <li><a href="#skills">Development, Deployment & Quality</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="#presentation-section">About me</a></li>
+          <li><a href="#frontend-section">Front End</a></li>
+          <li><a href="#backend-section">Back End</a></li>
+          <li>
+            <a href="#tools-section">Development, Deployment & Quality</a>
+          </li>
+          <li><a href="#portfolio-section">Portfolio</a></li>
         </ul>
       </nav>
       <div class="social" aria-label="Social links">
@@ -96,7 +119,7 @@
       </div>
     </section>
     <section class="portfolio" id="content">
-      <section id="resume" class="panel">
+      <section id="presentation-section" class="panel">
         <h2>First things first</h2>
         <p>Hi, my name is Nicola.</p>
         <p>I’m a web developer from Rimini, Italy.</p>
@@ -126,7 +149,7 @@
         </p>
       </section>
       <div class="divider" role="separator" aria-orientation="horizontal"></div>
-      <section id="projects" class="panel">
+      <section id="frontend-section" class="panel">
         <h2>Front End</h2>
         <p>
           When working on front end solutions, I focus on performance and
@@ -272,7 +295,7 @@
         </div>
       </section>
       <div class="divider" role="separator" aria-orientation="horizontal"></div>
-      <section id="experience" class="panel">
+      <section id="backend-section" class="panel">
         <h2>Back End</h2>
         <p>
           I’ve worked on back end systems ranging from small services to full
@@ -351,7 +374,7 @@
         </div>
       </section>
       <div class="divider" role="separator" aria-orientation="horizontal"></div>
-      <section id="skills" class="panel">
+      <section id="tools-section" class="panel">
         <h2>Development, Delivery & Quality</h2>
         <p>
           I have experience working with both managed cloud infrastructures and
@@ -462,13 +485,55 @@
           </div>
         </div>
       </section>
-      <section id="contact" class="panel">
-        <h2>Contact</h2>
+      <section id="portfolio-section" class="panel">
+        <h2>Portfolio</h2>
         <p>
-          Email:
-          <a href="mailto:you@example.com">you@example.com</a>
+          While much of my work is focused on enterprise projects, here is a
+          selection of public projects I've worked on recently.
         </p>
-        <p>Links to social profiles or a contact form.</p>
+
+        <!-- My Website -->
+        <div class="project-card" aria-labelledby="my-portfolio">
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-link"
+          >
+            <h3>This very website</h3>
+          </a>
+          <p class="project-desc">
+            My personal portfolio website, built from scratch using vanilla
+            HTML, CSS, and JavaScript, aiming for simplicity, efficiency, and
+            accessibility.
+          </p>
+        </div>
+
+        <!-- Muta -->
+        <div class="project-card" aria-labelledby="muta-animation">
+          <a
+            href="https://www.mutanimation.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-link"
+          >
+            <h3>Muta Animation - Website</h3>
+          </a>
+          <p class="project-desc">
+            Muta Animation: a website for an animation studio, built with fully
+            static templates using 11ty and showcasing their stunning visual
+            assets.
+          </p>
+          <a
+            class="project-cta"
+            href="https://www.mutanimation.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Visit project</a
+          >
+        </div>
+
+        <i>More work is underway - check back soon to see what’s next! </i>
       </section>
     </section>
     <script src="index.js"></script>

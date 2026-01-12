@@ -249,6 +249,56 @@ body {
   transform: scale(1.1);
 }
 
+/* Project card (portfolio template) */
+.project-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  padding: 25px;
+  border-radius: 10px;
+  margin: 16px 0;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.35);
+  max-width: 720px;
+}
+
+.project-card h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.1rem;
+  color: #eaf4ff;
+}
+
+.project-desc {
+  margin: 0 0 8px 0;
+  color: #d6e6ff;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+
+.project-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-cta {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #cfe2ff;
+  text-decoration: none;
+  transition: transform 120ms ease, background 120ms ease;
+}
+
+.project-cta:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+}
+
+
 .stack-info {
   display: block;
   margin: 12px 0;
