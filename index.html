@@ -23,7 +23,7 @@
           <li><a href="#resume">About me</a></li>
           <li><a href="#projects">Front End</a></li>
           <li><a href="#experience">Back End</a></li>
-          <li><a href="#skills">Skills</a></li>
+          <li><a href="#skills">Development, Deployment & Quality</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -143,6 +143,13 @@
           development environments.
         </p>
         <p>
+          I work with a variety of rendering strategies depending on project
+          needs, including client-side rendering (CSR), server-side rendering
+          (SSR), incremental static regeneration (ISR), and fully static sites.
+          Choosing the right approach allows me to optimize performance,
+          scalability, and user experience for each application.
+        </p>
+        <p>
           My goal is to deliver simple, intuitive and maintainable interfaces,
           making the most out of each tool without unnecessary complexity.
         </p>
@@ -154,7 +161,7 @@
           <i class="stack-info"
             >Core Stack: what I use everyday in production</i
           >
-          <div>
+          <div class="stack-logos-container">
             <img
               class="tech-logo"
               src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg"
@@ -207,9 +214,10 @@
         </div>
         <div class="tech-card">
           <i class="stack-info"
-            >Side Stack: tools I use for personal projects and experiments.</i
+            >Side Stack: tools I use for side projects, personal projects or
+            experiments.</i
           >
-          <div>
+          <div class="stack-logos-container">
             <img
               class="tech-logo"
               src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/eleventy/eleventy-original.svg"
@@ -282,14 +290,14 @@
           <i class="stack-info"
             >Explore my back end stack by clicking the icons below</i
           >
-          <div>
+          <div class="stack-logos-container">
             <img
               class="tech-logo"
               src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/dotnetcore/dotnetcore-original.svg"
               alt=".NET Core"
               role="button"
               tabindex="0"
-              data-desc=".NET Core for enterprise back ends and microservices."
+              data-desc=".NET Core: for enterprise back ends solutions and microservices."
             />
             <img
               class="tech-logo"
@@ -297,7 +305,7 @@
               alt="EF Core"
               role="button"
               tabindex="0"
-              data-desc="Entity Framework Core for ORM and data access patterns."
+              data-desc="Entity Framework Core: ORM and data access patterns."
             />
             <img
               class="tech-logo"
@@ -305,15 +313,7 @@
               alt="Docker"
               role="button"
               tabindex="0"
-              data-desc="Docker for containerization and reproducible development environments."
-            />
-            <img
-              class="tech-logo"
-              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg"
-              alt="Prisma"
-              role="button"
-              tabindex="0"
-              data-desc="Prisma ORM for type-safe DB access and migrations."
+              data-desc="Docker: containerization and reproducible development environments."
             />
             <img
               class="tech-logo"
@@ -321,7 +321,15 @@
               alt="Node.js"
               role="button"
               tabindex="0"
-              data-desc="Node.js for APIs and server-side JavaScript."
+              data-desc="Node.js: simple APIs and server-side JavaScript."
+            />
+            <img
+              class="tech-logo"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/prisma/prisma-original.svg"
+              alt="Prisma"
+              role="button"
+              tabindex="0"
+              data-desc="Prisma: ORM for type-safe DB access and migrations when working with Node.js."
             />
             <img
               class="tech-logo"
@@ -344,36 +352,115 @@
       </section>
       <div class="divider" role="separator" aria-orientation="horizontal"></div>
       <section id="skills" class="panel">
-        <h2>Skills</h2>
-        <ul>
-          <li>HTML5, Semantic Markup</li>
-          <li>Modern CSS (Flexbox, Grid, Responsive)</li>
-          <li>JavaScript (ES6+), Frameworks</li>
-          <li>Accessibility (a11y), Performance</li>
-        </ul>
+        <h2>Development, Delivery & Quality</h2>
         <p>
-          More details and long descriptions to extend the panel length for
-          scrolling demo:
+          I have experience working with both managed cloud infrastructures and
+          self-hosted environments, which allows me to evaluate and choose the
+          most suitable deployment strategy for each project. I regularly use
+          Azure for deployment and DevOps workflows, while also being
+          comfortable managing Linux-based VPS architectures when greater
+          control or customization is required.
         </p>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec
-          odio. Praesent libero. Sed cursus ante dapibus diam. Sed nisi. Nulla
-          quis sem at nibh elementum imperdiet. Duis sagittis ipsum.
+          I have been involved in both static and dynamic code security
+          analysis, using tools such as SonarQube and OWASP ZAP to monitor code
+          quality and identify potential vulnerabilities. This has strengthened
+          my attention to building applications that are reliable, maintainable,
+          and secure by design.
         </p>
         <p>
-          Praesent mauris. Fusce nec tellus sed augue semper porta. Mauris
-          massa. Vestibulum lacinia arcu eget nulla.
+          I also work with content management systems such as WordPress and
+          Directus, both in traditional and headless setups, integrating them
+          into modern application architectures when content flexibility and
+          scalability are required.
         </p>
-        <p>
-          Extra skills details: component architecture, performance budgeting,
-          tooling (Webpack, Vite), testing (Jest, Testing Library), CI/CD and
-          observability.
-        </p>
-        <p>
-          Longer content to ensure clear scroll behavior: etiam porta sem
-          malesuada magna mollis euismod. Cras mattis consectetur purus sit amet
-          fermentum.
-        </p>
+        <div class="tech-card">
+          <i class="stack-info">Explore my stack by clicking the icons below</i>
+          <div class="stack-logos-container">
+            <img
+              class="tech-logo"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/azure/azure-original.svg"
+              alt="Azure"
+              role="button"
+              tabindex="0"
+              data-desc="Azure: my main platform for deploying and managing fully managed production environments."
+            />
+
+            <img
+              class="tech-logo"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/digitalocean/digitalocean-original.svg"
+              alt="DigitalOcean"
+              role="button"
+              tabindex="0"
+              data-desc="DigitalOcean: my go-to choice for setting up and maintaining self-hosted VPS infrastructures."
+            />
+
+            <img
+              class="tech-logo"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sonarqube/sonarqube-plain-wordmark.svg"
+              alt="SonarQube"
+              role="button"
+              tabindex="0"
+              data-desc="SonarQube: used for static code analysis and continuous code quality monitoring."
+            />
+
+            <img
+              class="tech-logo"
+              style="filter: invert(1)"
+              src="https://upload.wikimedia.org/wikipedia/commons/e/ef/OWASP_black_logo.svg"
+              alt="OWASP Zap"
+              role="button"
+              tabindex="0"
+              data-desc="OWASP ZAP: used for dynamic security testing and vulnerability assessment."
+            />
+
+            <img
+              class="tech-logo"
+              src="https://raw.githubusercontent.com/2fasvg/2fasvg.github.io/master/assets/img/logo/directus.io/directus.io.svg"
+              alt="Directus"
+              role="button"
+              tabindex="0"
+              data-desc="Directus: used for managing content when going for headless setups."
+            />
+
+            <img
+              class="tech-logo"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg"
+              alt="WordPress"
+              role="button"
+              tabindex="0"
+              data-desc="WordPress: not my personal favorite, but invaluable for speeding up work and simplifying collaboration with
+                                agencies, marketing teams, and clients."
+            />
+
+            <img
+              class="tech-logo"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/cloudflare/cloudflare-original.svg"
+              alt="Cloudflare"
+              role="button"
+              tabindex="0"
+              data-desc="Cloudflare: for CDN, performance optimization, DNS management, and security features."
+            />
+
+            <img
+              class="tech-logo"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg"
+              alt="Git"
+              role="button"
+              tabindex="0"
+              data-desc="Git: of course an essential part of my daily workflow for version control, collaboration, and traceability."
+            />
+
+            <img
+              class="tech-logo"
+              src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg"
+              alt="Postman"
+              role="button"
+              tabindex="0"
+              data-desc="Postman: an essential tool for API development, testing, and collaboration."
+            />
+          </div>
+        </div>
       </section>
       <section id="contact" class="panel">
         <h2>Contact</h2>
