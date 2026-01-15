@@ -27,75 +27,22 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   };
 
-  // Click handler: highlight immediately and scroll inside container smoothly
-  links.forEach((link) => {
-    link.addEventListener("click", (e) => {
-      e.preventDefault();
-      const id = link.getAttribute("href").slice(1);
-      const target = container.querySelector("#" + id);
-      if (!target) return;
-
-      // Aggiorna subito l'elemento attivo
-      setActive(id);
-
-      // Usa scrollIntoView con offset per header fisso
-      const headerOffset = 60; // altezza menu/header fisso
-
-      if (!isMobile()) {
-        const elementPosition = target.getBoundingClientRect().top;
-        const offsetPosition =
-          elementPosition + container.scrollTop - headerOffset;
-
-        container.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        });
-      } else {
-        // Ottieni la posizione assoluta rispetto al documento
-        const targetPosition =
-          target.getBoundingClientRect().top + window.pageYOffset;
-        const scrollToPosition = targetPosition - headerOffset;
-
-        // Scroll fluido usando window
-        window.scrollTo({
-          top: scrollToPosition,
-          behavior: "smooth",
-        });
-      }
-
-      // Disabilita aggiornamento durante lo scroll programmatico
-      const distance = Math.abs(offsetPosition - container.scrollTop);
-      const estimatedDuration = Math.min(
-        900,
-        Math.max(320, Math.round(distance * 0.5))
-      );
-      isProgrammaticScroll = true;
-      clearTimeout(programmaticScrollTimer);
-      programmaticScrollTimer = setTimeout(() => {
-        isProgrammaticScroll = false;
-      }, estimatedDuration + 80);
-    });
-  });
-
-  // Smooth, low-jitter scroll handler using container center
+  // Smooth, low-jitter scroll handler using viewport center
   let ticking = false;
   let isProgrammaticScroll = false;
-  let programmaticScrollTimer = null;
 
   const onScroll = () => {
     if (ticking) return;
     if (isProgrammaticScroll) return; // ignore scroll events triggered by our smooth scroll
     ticking = true;
     requestAnimationFrame(() => {
-      // Use viewport coordinates to compute the element closest to the container center
-      const containerRect = container.getBoundingClientRect();
-      const containerCenterY = containerRect.top + container.clientHeight / 2;
+      const viewportCenterY = window.innerHeight / 2;
       let nearest = null;
       let minDist = Infinity;
       sections.forEach((s) => {
         const r = s.getBoundingClientRect();
         const midY = r.top + r.height / 2;
-        const dist = Math.abs(midY - containerCenterY);
+        const dist = Math.abs(midY - viewportCenterY);
         if (dist < minDist) {
           minDist = dist;
           nearest = s;
@@ -106,13 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  container.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener(
     "scroll",
     () => {
       // distanza scrollata dall'inizio
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const showAfter = 300; // mostra il bottone dopo 300px di scroll
 
       if (scrollTop > showAfter) {
@@ -123,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
     { passive: true }
   );
+
   // Initial highlight
   if (sections.length && !isMobile()) setActive(sections[0].id);
 
