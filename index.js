@@ -1,5 +1,6 @@
 function isMobile() {
-  const regex = /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+  const regex =
+    /Mobi|Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
   return regex.test(navigator.userAgent);
 }
 
@@ -23,42 +24,41 @@ document.addEventListener("DOMContentLoaded", () => {
     if (activeId === id) return;
     activeId = id;
     links.forEach((l) =>
-      l.classList.toggle("active", l.getAttribute("href") === "#" + id)
+      l.classList.toggle("active", l.getAttribute("href") === "#" + id),
     );
   };
 
-  // Smooth, low-jitter scroll handler using viewport center
-  let ticking = false;
+  const OFFSET = 400; // distanza dal top viewport che decide la sezione attiva
   let isProgrammaticScroll = false;
 
   const onScroll = () => {
-    if (ticking) return;
-    if (isProgrammaticScroll) return; // ignore scroll events triggered by our smooth scroll
-    ticking = true;
-    requestAnimationFrame(() => {
-      const viewportCenterY = window.innerHeight / 2;
-      let nearest = null;
-      let minDist = Infinity;
-      sections.forEach((s) => {
-        const r = s.getBoundingClientRect();
-        const midY = r.top + r.height / 2;
-        const dist = Math.abs(midY - viewportCenterY);
-        if (dist < minDist) {
-          minDist = dist;
-          nearest = s;
-        }
-      });
-      if (nearest) setActive(nearest.id);
-      ticking = false;
+    if (isProgrammaticScroll) return;
+
+    const scrollPos = window.scrollY + OFFSET;
+
+    let current = sections[0];
+
+    sections.forEach((section) => {
+      if (section.offsetTop <= scrollPos) {
+        current = section;
+      }
     });
+
+    if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+      current = sections[sections.length - 1];
+    }
+
+    setActive(current.id);
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
+
   window.addEventListener(
     "scroll",
     () => {
       // distanza scrollata dall'inizio
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
       const showAfter = 300; // mostra il bottone dopo 300px di scroll
 
       if (scrollTop > showAfter) {
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         scrollToTop.style.opacity = "0";
       }
     },
-    { passive: true }
+    { passive: true },
   );
 
   // Initial highlight
