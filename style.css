@@ -636,9 +636,9 @@ a {
     max-height: none;
     overflow-y: auto;
     align-items: center;
-    justify-content: space-between;
-    gap: clamp(12px, 2.4svh, 30px);
-    padding: clamp(18px, 3svh, 32px) 22px;
+    justify-content: center;
+    gap: clamp(18px, 1.6svh, 28px);
+    padding: clamp(14px, 2.4svh, 32px) 30px;
     background:
       radial-gradient(420px 220px at 50% 0%, rgba(99, 102, 241, 0.2), transparent 70%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
@@ -652,7 +652,10 @@ a {
     flex-direction: row;
     justify-content: center;
     gap: 16px;
-    text-align: left;
+  }
+
+  .image-and-name > div {
+    text-align: center;
   }
 
   .profile img {
@@ -662,11 +665,14 @@ a {
   }
 
   .profile h1 {
+    text-align: left;
     font-size: clamp(1.55rem, 3.2svh, 2.2rem);
   }
 
   .profile h2 {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
   }
 
   .bio {
@@ -685,11 +691,11 @@ a {
   }
 
   .side-menu a {
-    padding: clamp(9px, 2svh, 17px) 16px;
+    padding: clamp(6px, 1.5svh, 17px) 16px;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     background: var(--surface);
-    font-size: clamp(0.95rem, 1.9svh, 1.05rem);
+    font-size: clamp(0.95rem, 1.9svh, 1rem);
     text-align: center;
   }
 
@@ -737,29 +743,31 @@ a {
   }
 }
 
-/* Tall phones: photo above the name, scaled to the screen height */
-@media (max-width: 900px) and (min-height: 701px) {
+/* Tall phones: larger photo beside the name, spacing scaled to the screen height */
+@media (max-width: 900px) and (min-height: 641px) {
   .image-and-name {
-    flex-direction: column;
-    gap: clamp(14px, 2.2svh, 22px);
-    text-align: center;
+    gap: 18px;
   }
 
   .profile img {
-    width: clamp(112px, 18svh, 190px);
-    height: clamp(112px, 18svh, 190px);
+    width: clamp(72px, 12.5svh, 104px);
+    height: clamp(72px, 12.5svh, 104px);
   }
 
   .profile h1 {
-    font-size: clamp(1.7rem, 3.4svh, 2.3rem);
-  }
-
-  .profile h2 {
-    font-size: 0.8rem;
+    font-size: clamp(1.4rem, 3svh, 1.7rem);
   }
 
   .bio {
-    font-size: clamp(0.95rem, 1.9svh, 1.1rem);
+    font-size: clamp(0.9rem, 1.8svh, 1.1rem);
+  }
+
+  .side-menu ul {
+    gap: clamp(6px, calc(1.2svh + max(0px, 100svh - 700px) * 0.03), 16px);
+  }
+
+  .side-menu a {
+    padding: clamp(6px, calc(1.5svh + max(0px, 100svh - 700px) * 0.05), 21px) 16px;
   }
 }
 
@@ -849,7 +857,7 @@ a {
   }
 }
 
-@media (max-width: 900px) and (max-height: 700px) {
+@media (max-width: 900px) and (max-height: 640px) {
   .personal-info {
     gap: 10px;
     padding: 16px 18px;
@@ -934,10 +942,6 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   *,
   *::before,
   *::after {
