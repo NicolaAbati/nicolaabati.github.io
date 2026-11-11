@@ -61,14 +61,34 @@ document.addEventListener("DOMContentLoaded", () => {
         window.pageYOffset || document.documentElement.scrollTop;
       const showAfter = 300; // mostra il bottone dopo 300px di scroll
 
-      if (scrollTop > showAfter) {
-        scrollToTop.style.opacity = "1";
-      } else {
-        scrollToTop.style.opacity = "0";
-      }
+      scrollToTop.classList.toggle("visible", scrollTop > showAfter);
     },
     { passive: true },
   );
+
+  // Scroll reveal
+  const revealTargets = Array.from(
+    document.querySelectorAll(".panel > *:not(br), .site-footer"),
+  );
+  if (
+    "IntersectionObserver" in window &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -6% 0px" },
+    );
+    revealTargets.forEach((el) => {
+      el.classList.add("reveal");
+      revealObserver.observe(el);
+    });
+  }
 
   // Initial highlight
   if (sections.length && !isMobile()) setActive(sections[0].id);
@@ -155,7 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
       overlay.style.alignItems = "flex-start";
       // position pop next to logo
       const rect = logoEl.getBoundingClientRect();
-      const popRect = pop.getBoundingClientRect();
       // default place to the right
       let left = rect.right + 12;
       let top = rect.top;
@@ -164,8 +183,9 @@ document.addEventListener("DOMContentLoaded", () => {
         left = rect.left - 12 - 320;
       }
       // ensure top within viewport
-      if (top + popRect.height > window.innerHeight)
-        top = window.innerHeight - popRect.height - 12;
+      // offsetHeight ignores the opening scale animation
+      if (top + pop.offsetHeight > window.innerHeight)
+        top = window.innerHeight - pop.offsetHeight - 12;
       if (top < 12) top = 12;
       pop.style.left = left + "px";
       pop.style.top = top + "px";
