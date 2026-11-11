@@ -105,7 +105,6 @@ a {
 /* Keeps the content column clear of the fixed sidebar */
 .portfolio {
   margin-left: calc(var(--sidebar-w) + var(--layout-gap));
-  max-width: 780px;
   padding-top: max(0px, calc(var(--side-top) - 32px));
 }
 
@@ -296,7 +295,6 @@ a {
 
 .panel p {
   margin: 1.1em 0;
-  max-width: 65ch;
   line-height: 1.75;
 }
 
@@ -631,15 +629,16 @@ a {
     top: auto;
     bottom: auto;
     margin-block: 0;
-    width: 100%;
+    margin-inline: clamp(-12px, -2vw, -6px);
+    width: auto;
     height: calc(100vh - 32px);
     height: calc(100svh - 32px);
     max-height: none;
     overflow-y: auto;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     gap: clamp(12px, 2.4svh, 30px);
-    padding: clamp(20px, 4svh, 48px) 22px;
+    padding: clamp(18px, 3svh, 32px) 22px;
     background:
       radial-gradient(420px 220px at 50% 0%, rgba(99, 102, 241, 0.2), transparent 70%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
@@ -657,13 +656,13 @@ a {
   }
 
   .profile img {
-    width: clamp(64px, 11svh, 112px);
-    height: clamp(64px, 11svh, 112px);
+    width: clamp(64px, 11svh, 128px);
+    height: clamp(64px, 11svh, 128px);
     flex-shrink: 0;
   }
 
   .profile h1 {
-    font-size: clamp(1.55rem, 3.2svh, 2rem);
+    font-size: clamp(1.55rem, 3.2svh, 2.2rem);
   }
 
   .profile h2 {
@@ -686,7 +685,7 @@ a {
   }
 
   .side-menu a {
-    padding: clamp(9px, 1.8svh, 16px) 16px;
+    padding: clamp(9px, 2svh, 17px) 16px;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     background: var(--surface);
@@ -714,7 +713,7 @@ a {
   .portfolio {
     margin-left: 0;
     max-width: none;
-    padding-top: 24px;
+    padding-top: 56px;
   }
 
   .divider {
@@ -735,6 +734,32 @@ a {
 
   .panel h2 + p {
     font-size: 1.1rem;
+  }
+}
+
+/* Tall phones: photo above the name, scaled to the screen height */
+@media (max-width: 900px) and (min-height: 701px) {
+  .image-and-name {
+    flex-direction: column;
+    gap: clamp(14px, 2.2svh, 22px);
+    text-align: center;
+  }
+
+  .profile img {
+    width: clamp(112px, 18svh, 190px);
+    height: clamp(112px, 18svh, 190px);
+  }
+
+  .profile h1 {
+    font-size: clamp(1.7rem, 3.4svh, 2.3rem);
+  }
+
+  .profile h2 {
+    font-size: 0.8rem;
+  }
+
+  .bio {
+    font-size: clamp(0.95rem, 1.9svh, 1.1rem);
   }
 }
 
